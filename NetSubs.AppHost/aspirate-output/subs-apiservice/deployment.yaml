@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subs-apiservice
+  labels:
+    app: subs-apiservice
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: subs-apiservice
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: subs-apiservice
+    spec:
+      containers:
+      - name: subs-apiservice
+        image: subs-apiservice:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        envFrom:
+        - configMapRef:
+            name: subs-apiservice-env
+        - secretRef:
+            name: subs-apiservice-secrets
+      terminationGracePeriodSeconds: 180

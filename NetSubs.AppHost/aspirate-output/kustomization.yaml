@@ -1,0 +1,13 @@
+namespace: netsubs
+
+resources:
+- subs-db
+- cache
+- subs-apiservice
+- namespace.yaml
+- dashboard.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+

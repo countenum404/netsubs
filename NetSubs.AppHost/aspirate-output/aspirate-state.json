@@ -1,0 +1,12 @@
+{
+  "inputPath": "aspirate-output",
+  "containerImageTags": [
+    "latest"
+  ],
+  "outputFormat": "docker",
+  "secrets": {
+    "salt": "ReGv3UyVhUkNTa7q",
+    "hash": "zo/\u002BsphoN1I26jdt6IdO1BC/WSvIHYmHF29Jz8\u002BgK0o=",
+    "secrets": {}
+  }
+}

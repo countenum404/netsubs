@@ -1,0 +1,20 @@
+resources:
+- deployment.yaml
+- service.yaml
+- volume.yml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: subs-db-env
+  literals:
+    - POSTGRES_DB=subs
+    - DB_USER=postgres
+    - OTEL_EXPORTER_OTLP_ENDPOINT=http://aspire-dashboard:18889
+    - OTEL_SERVICE_NAME=subs-db
+
+secretGenerator:
+- name: subs-db-secrets
+  envs:
+  - .subs-db.secrets

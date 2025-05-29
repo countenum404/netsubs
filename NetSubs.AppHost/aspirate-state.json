@@ -1,0 +1,30 @@
+{
+  "projectPath": ".",
+  "outputPath": "aspirate-output",
+  "namespace": "netsubs",
+  "containerImageTags": [
+    "latest"
+  ],
+  "imagePullPolicy": "IfNotPresent",
+  "containerBuilder": "docker",
+  "outputFormat": "kustomize",
+  "skipFinalKustomizeGeneration": false,
+  "privateRegistryEmail": "aspir8@aka.ms",
+  "includeDashboard": true,
+  "useCustomNamespace": true,
+  "secrets": {
+    "salt": "NHX/p\u002BgxPZY84fAL",
+    "hash": "y7vkMgdYWXe3x0leu05zgx\u002BuWO/WAazE9VFf2YuPq1U=",
+    "secrets": {
+      "cache-password": {
+        "value": "NHX/p\u002BgxPZY84fALsDcbuGQvLtMzB91Uu2tlKpSnM3pu9SscWFRLVHcGdE6c9g2hv2E="
+      },
+      "subs-db": {
+        "POSTGRES_PASSWORD": "NHX/p\u002BgxPZY84fALqlmpy3Im0tXeSIA24vnbX5DFUSA="
+      },
+      "cache": {},
+      "subs-apiservice": {}
+    }
+  },
+  "processAllComponents": true
+}

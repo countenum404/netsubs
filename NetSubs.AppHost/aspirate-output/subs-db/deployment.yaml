@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subs-db
+  labels:
+    app: subs-db
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: subs-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: subs-db
+    spec:
+      containers:
+      - name: subs-db
+        image: postgres:latest
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: "/var/lib/postgresql/data"
+            name: data-volume
+        ports:
+        - name: tcp
+          containerPort: 5432
+        envFrom:
+        - configMapRef:
+            name: subs-db-env
+        - secretRef:
+            name: subs-db-secrets
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: pg-data
