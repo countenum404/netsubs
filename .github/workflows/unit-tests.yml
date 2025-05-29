@@ -1,28 +1,40 @@
-name: Run Unit Tests
+name: .NET Core Unit Tests
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - develop
+      - 'feature/*'
   pull_request:
-    types: [ opened, synchronize, reopened ]
+    branches:
+      - main
+      - develop
 
 jobs:
-  unit_tests:
+  build-and-test:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: Setup .NET Core
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0.x'
-          
+
       - name: Restore dependencies
-        run: dotnet restore
-        
+        run: |
+          cd NetSubs.ApiService
+          dotnet restore NetSubs.ApiService.sln
+
       - name: Build solution
-        run: dotnet build --configuration Release
+        run: |
+          cd NetSubs.ApiService
+          dotnet build --no-restore --configuration Release NetSubs.ApiService.sln
 
       - name: Run unit tests
         run: |
-          dotnet test --no-build --logger "trx;LogFileName=test_results.trx" NetSubs.ApiService/Tests/UnitTests
+          cd NetSubs.ApiService/Tests/UnitTests
+          dotnet test --no-build --verbosity normal
