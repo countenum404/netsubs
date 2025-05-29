@@ -11,20 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-    
+      
+      # Устанавливаем требуемую версию .NET SDK
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '9.x.x'
+          dotnet-version: '7.0.x'
           
-      - name: Navigate to test directory
-        run: cd NetSubs.ApiService/Tests/UnitTests
-        
+      # Восстанавливаем NuGet-пакеты
       - name: Restore dependencies
         run: dotnet restore
         
-      - name: Build tests
+      # Собираем проект целиком
+      - name: Build solution
         run: dotnet build --configuration Release
         
+      # Запускаем юнит-тесты
       - name: Run unit tests
-        run: dotnet test --no-build --logger "trx;LogFileName=test_results.trx"
+        run: |
+          dotnet test --no-build --logger "trx;LogFileName=test_results.trx" NetSubs.ApiService/Tests/UnitTests
