@@ -11,23 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+    
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.x.x'
-      
+          
+      - name: Navigate to test directory
+        run: cd NetSubs.ApiService/Tests/UnitTests
+        
       - name: Restore dependencies
-        run: |
-          cd NetSubs.ApiService.Tests/UnitTests
-          dotnet restore
-      
+        run: dotnet restore
+        
       - name: Build tests
-        run: |
-          cd NetSubs.ApiService.Tests/UnitTests
-          dotnet build --configuration Release
-      
+        run: dotnet build --configuration Release
+        
       - name: Run unit tests
-        run: |
-          cd NetSubs.ApiService.Tests/UnitTests
-          dotnet test --no-build --logger "trx;LogFileName=test_results.trx"
+        run: dotnet test --no-build --logger "trx;LogFileName=test_results.trx"
