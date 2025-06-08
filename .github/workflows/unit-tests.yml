@@ -25,16 +25,10 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Restore dependencies
-        run: |
-          cd NetSubs.ApiService
-          dotnet restore NetSubs.ApiService.sln
+        run: dotnet restore
 
-      - name: Build solution
-        run: |
-          cd NetSubs.ApiService
-          dotnet build --no-restore --configuration Release NetSubs.ApiService.sln
+      - name: Build project
+        run: dotnet build ./NetSubs.ApiService/NetSubs.ApiService.csproj --no-restore --configuration Release
 
       - name: Run unit tests
-        run: |
-          cd NetSubs.UnitTests
-          dotnet test --no-build --verbosity normal
+        run: dotnet test --no-build --verbosity normal .\NetSubs.UnitTests\ 
