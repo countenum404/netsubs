@@ -36,5 +36,5 @@ jobs:
 
       - name: Run unit tests
         run: |
-          cd NetSubs.ApiService/Tests/UnitTests
+          cd NetSubs.UnitTests
           dotnet test --no-build --verbosity normal

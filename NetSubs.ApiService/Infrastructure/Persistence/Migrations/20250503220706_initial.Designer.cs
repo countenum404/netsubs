@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NetSubs.ApiService.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(SubscriptionsDbContext))]
-    [Migration("20250503220706_initial")]
-    partial class initial
+    [Migration("20250503220706_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
